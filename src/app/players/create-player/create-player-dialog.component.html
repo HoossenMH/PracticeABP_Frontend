@@ -20,41 +20,20 @@
             <mat-form-field>
               <input
                 matInput
-                name="DisplayName"
-                [placeholder]="'DisplayName' | localize"
-                [(ngModel)]="player.displayName"
-                required
-                minlength="2"
-                maxlength="32"
+                name="Age"
+                [placeholder]="'Age'"
+                [(ngModel)]="player.age"
               />
             </mat-form-field>
             <mat-form-field>
-              <textarea
+              <input
                 matInput
-                name="Description"
-                [placeholder]="'PlayerDescription' | localize"
-                [(ngModel)]="player.description"
-              ></textarea>
+                name="Height"
+                [placeholder]="'Height'"
+                [(ngModel)]="player.height"
+              >
             </mat-form-field>
           </div>
-        </div>
-      </mat-tab>
-      <mat-tab [label]="'Permissions' | localize">
-        <br />
-        <div class="row-fluid">
-          <ng-template ngFor let-permission [ngForOf]="permissions">
-            <div class="col-md-6">
-              <div class="checkbox-wrapper">
-                <mat-checkbox
-                  [checked]="isPermissionChecked(permission.name)"
-                  [disabled]="player.isStatic"
-                  (change)="onPermissionChange(permission, $event)"
-                >
-                  {{ permission.displayName }}
-                </mat-checkbox>
-              </div>
-            </div>
-          </ng-template>
         </div>
       </mat-tab>
     </mat-tab-group>

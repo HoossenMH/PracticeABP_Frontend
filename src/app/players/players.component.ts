@@ -30,13 +30,13 @@ class PagedPlayersRequestDto extends PagedRequestDto {
     ]
 })
 export class PlayersComponent extends PagedListingComponentBase<PlayerDto> {
-    roles: PlayerDto[] = [];
+    players: PlayerDto[] = [];
 
     keyword = '';
 
     constructor(
         injector: Injector,
-        private _rolesService: PlayerServiceProxy,
+        private _playerService: PlayerServiceProxy,
         private _dialog: MatDialog
     ) {
         super(injector);
@@ -50,7 +50,7 @@ export class PlayersComponent extends PagedListingComponentBase<PlayerDto> {
 
         request.keyword = this.keyword;
 
-        this._rolesService
+        this._playerService
             .getAll(request.keyword, request.skipCount, request.maxResultCount)
             .pipe(
                 finalize(() => {
@@ -58,7 +58,7 @@ export class PlayersComponent extends PagedListingComponentBase<PlayerDto> {
                 })
             )
             .subscribe((result: PagedResultDtoOfPlayerDto) => {
-                this.roles = result.items;
+                this.players = result.items;
                 this.showPaging(result, pageNumber);
             });
     }
@@ -68,7 +68,7 @@ export class PlayersComponent extends PagedListingComponentBase<PlayerDto> {
             this.l('PlayerDeleteWarningMessage', player.name),
             (result: boolean) => {
                 if (result) {
-                    this._rolesService
+                    this._playerService
                         .delete(player.id)
                         .pipe(
                             finalize(() => {
